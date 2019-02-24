@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddWorkout"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_set_date"
+            android:hint="@string/set_date_format"
+            android:inputType="date"
+            android:autofillHints="AUTOFILL_TYPE_DATE"
+    />
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/b_set_date"
+            android:text="@string/use_todays_date"/>
+
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_weekday_spinner"
+
+    />
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_focus"
+            android:hint="@string/todays_focus"
+            android:inputType="text"
+            android:importantForAutofill="no"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/b_start_workout"
+            android:text="@string/start_workout"/>
+</LinearLayout>
