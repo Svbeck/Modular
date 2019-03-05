@@ -51,10 +51,11 @@ class CreateWorkout : Fragment(), AdapterView.OnItemSelectedListener{
             newWorkout.focus = focusDescription.text.toString()
             Log.e("Supertest", newWorkout.date.toString() +
                     newWorkout.weekday.toString() + newWorkout.focus.toString())
+
         }
         return createWorkout
-    }
-    override fun onItemSelected(adaperView: AdapterView<*>?, view: View?, position: Int, id: Long) {
+    }//TODO https://stackoverflow.com/questions/49662707/exampledynamic-fragments-inter-fragment-communication-fragment-getting-re-add
+    override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when {
             position == 1 -> newWorkout.weekday = DayOfWeek.MONDAY
             position == 2 -> newWorkout.weekday = DayOfWeek.TUESDAY

@@ -1,11 +1,11 @@
 package com.example.modular
 
 class Exercise(
-    val exerciseName: String,
-    val sets: Int,
-    val kg: Array<Int>,
-    val reps: Array<Int>,
-    val restTimeSec: Int?,
-    val enum: String?,
-    val exerciseNote: String?
+    var exerciseName: String,
+    var sets: Int,
+    var kg: Array<Float>,
+    var reps: Array<Int>,
+    var restTimeSec: Int?,
+    var emom: String?,
+    var exerciseNote: String?
 )

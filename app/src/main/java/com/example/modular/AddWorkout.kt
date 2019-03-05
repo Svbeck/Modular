@@ -16,6 +16,8 @@ import java.time.DayOfWeek
 //Split into fragments
 class AddWorkout : AppCompatActivity() {
 
+
+
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
 
