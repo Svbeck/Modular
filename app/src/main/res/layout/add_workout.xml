@@ -6,12 +6,14 @@
         android:layout_height="match_parent"
         tools:context=".AddWorkout"
         android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/ll_add_workout">
 
-    <fragment
+    <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:name="com.example.modular.CreateWorkout"
-            android:id="@+id/fr_create_workout"
+            android:id="@+id/fl_create_workout"
+
     />
 </LinearLayout>

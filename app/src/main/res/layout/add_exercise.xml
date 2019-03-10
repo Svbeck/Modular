@@ -4,13 +4,15 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <Spinner
+    <EditText
             android:layout_width="72dp"
             android:layout_height="40dp"
-            android:id="@+id/s_sets_spinner"
-            android:layout_marginTop="208dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"/>
+            android:id="@+id/et_sets_spinner"
+            android:inputType="number"
+            android:layout_marginTop="344dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="124dp"/>
 
     <TextView
             android:layout_width="61dp"
@@ -19,16 +21,17 @@
             android:id="@+id/tv_set_number"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toStartOf="@+id/et_kg_input" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.307" android:layout_marginTop="36dp"
+            app:layout_constraintHorizontal_bias="1.0" android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/s_emom_spinner"/>
 
     <EditText
             android:layout_width="373dp"
             android:layout_height="wrap_content"
             android:id="@+id/et_exercise_name"
+            android:autofillHints="Name of exercise"
             android:inputType="text" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/s_sets_spinner" app:layout_constraintVertical_bias="0.965"
+            app:layout_constraintBottom_toTopOf="@+id/et_sets_spinner" app:layout_constraintVertical_bias="0.965"
             android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -37,7 +40,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_reps_input"
             android:inputType="number" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="264dp" android:layout_marginTop="36dp"
+            android:layout_marginEnd="172dp" android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/s_emom_spinner"/>
 
     <EditText
@@ -45,26 +48,26 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_kg_input"
             android:inputType="number"
-            app:layout_constraintEnd_toStartOf="@+id/et_reps_input" android:layout_marginEnd="4dp"
-            android:layout_marginTop="36dp" app:layout_constraintTop_toBottomOf="@+id/s_emom_spinner"/>
+            app:layout_constraintEnd_toStartOf="@+id/et_reps_input"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/s_emom_spinner"/>
 
     <EditText
             android:layout_width="63dp"
             android:layout_height="56dp"
             android:id="@+id/et_rest_sec"
             android:inputType="number"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@+id/tv_set_number" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="128dp"/>
 
 
     <Spinner
             android:layout_width="72dp"
             android:layout_height="40dp"
             android:id="@+id/s_emom_spinner"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/s_sets_spinner" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/et_sets_spinner" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="116dp"/>
 
     <EditText
             android:layout_width="match_parent"
@@ -74,7 +77,7 @@
             android:hint="Note for this exercise"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="340dp"
             app:layout_constraintTop_toBottomOf="@+id/et_rest_sec"/>
 
     <Button
@@ -86,6 +89,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/et_rest_sec"/>
 
 </android.support.constraint.ConstraintLayout>

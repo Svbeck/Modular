@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.*
+import java.util.function.ToIntFunction
 
 class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -14,7 +15,7 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val exerciseView = inflater.inflate(R.layout.add_exercise, container, false)
-        val setsSpinner = exerciseView.findViewById<Spinner>(R.id.s_sets_spinner)
+        //val setsSpinner = exerciseView.findViewById<Spinner>(R.id.s_sets_spinner)
         val emomSpinner = exerciseView.findViewById<Spinner>(R.id.s_emom_spinner)
         val exerciseNameInput = exerciseView.findViewById<EditText>(R.id.et_exercise_name)
         val repsInput = exerciseView.findViewById<EditText>(R.id.et_reps_input)
@@ -24,7 +25,7 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
         val finishWorkoutButton = exerciseView.findViewById<Button>(R.id.b_finish_workout)
 
         //Set spinner content
-        ArrayAdapter.createFromResource(
+        /*ArrayAdapter.createFromResource(
             context,
             R.array.sets,
             android.R.layout.simple_spinner_dropdown_item
@@ -34,7 +35,7 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         //Set sets spinner value
-        setsSpinner.onItemSelectedListener = this
+        setsSpinner.onItemSelectedListener = this*/
 
         ArrayAdapter.createFromResource(
             context,
@@ -48,11 +49,23 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
         //Set emom spinner value
         emomSpinner.onItemSelectedListener = this
 
+        var repsInputConv = repsInput.text.toString()
+        var kgInputCheck = kgInput.text.toString()
+        var pauseSecInputCheck = pauseSecInput.text.toString()
+
+        if (repsInputConv == "")
+            repsInputConv = "0"
+
+        if (kgInputCheck == "")
+            kgInputCheck = "0"
+
+        if (pauseSecInputCheck == "")
+            pauseSecInputCheck = "0"
 
         newExercise.exerciseName = exerciseNameInput.toString()
-        newExercise.reps[newExercise.reps.size] = repsInput.text.toString().toInt()
-        newExercise.sets = kgInput.text.toString().toInt()
-        newExercise.restTimeSec = pauseSecInput.text.toString().toInt()
+        newExercise.reps[newExercise.reps.size - 1] = repsInputConv.toInt()
+        newExercise.sets = kgInputCheck.toInt()
+        newExercise.restTimeSec = pauseSecInputCheck.toInt()
         newExercise.exerciseNote = noteInput.toString()
         finishWorkoutButton.setOnClickListener { v -> }
 
@@ -61,7 +74,8 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(adapterView: AdapterView<*>, view: View?, position: Int, id: Long) {
         if (adapterView.id == R.id.s_emom_spinner) {
-            when(position) {
+            when (position) {
+                0 -> newExercise.emom = ""
                 1 -> newExercise.emom = "EMOM"
                 2 -> newExercise.emom = "E2MOM"
                 3 -> newExercise.emom = "E3MOM"
