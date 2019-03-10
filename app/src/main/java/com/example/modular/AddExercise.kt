@@ -2,12 +2,11 @@ package com.example.modular
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.*
-import java.util.function.ToIntFunction
 
 class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -15,7 +14,6 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val exerciseView = inflater.inflate(R.layout.add_exercise, container, false)
-        //val setsSpinner = exerciseView.findViewById<Spinner>(R.id.s_sets_spinner)
         val emomSpinner = exerciseView.findViewById<Spinner>(R.id.s_emom_spinner)
         val exerciseNameInput = exerciseView.findViewById<EditText>(R.id.et_exercise_name)
         val repsInput = exerciseView.findViewById<EditText>(R.id.et_reps_input)
@@ -23,19 +21,6 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
         val pauseSecInput = exerciseView.findViewById<EditText>(R.id.et_rest_sec)
         val noteInput = exerciseView.findViewById<EditText>(R.id.et_exercise_note)
         val finishWorkoutButton = exerciseView.findViewById<Button>(R.id.b_finish_workout)
-
-        //Set spinner content
-        /*ArrayAdapter.createFromResource(
-            context,
-            R.array.sets,
-            android.R.layout.simple_spinner_dropdown_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            setsSpinner.adapter = adapter
-        }
-
-        //Set sets spinner value
-        setsSpinner.onItemSelectedListener = this*/
 
         ArrayAdapter.createFromResource(
             context,
@@ -62,12 +47,14 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
         if (pauseSecInputCheck == "")
             pauseSecInputCheck = "0"
 
-        newExercise.exerciseName = exerciseNameInput.toString()
+        newExercise.exerciseName = exerciseNameInput.text.toString()
         newExercise.reps[newExercise.reps.size - 1] = repsInputConv.toInt()
         newExercise.sets = kgInputCheck.toInt()
         newExercise.restTimeSec = pauseSecInputCheck.toInt()
         newExercise.exerciseNote = noteInput.toString()
-        finishWorkoutButton.setOnClickListener { v -> }
+        finishWorkoutButton.setOnClickListener {
+            Log.d("ExerciseInfo", newExercise.exerciseName)
+        }
 
         return exerciseView
     }

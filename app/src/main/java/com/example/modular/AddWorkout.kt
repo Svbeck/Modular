@@ -1,32 +1,34 @@
 package com.example.modular
 
-
-import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.*
 
 //Split into fragments
-class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler, AddExcerciseFragHandler {
+class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler, AddExerciseFragHandler {
 
-    val fragManager: FragmentManager = supportFragmentManager
+    private val  fragManager: FragmentManager = supportFragmentManager
 
-    val CREATE_WORKOUT_TAG = "CREATE_WORKOUT_FRAG"
-    val ADD_EXERCISE_TAG = "ADD_EXERCISE_FRAG"
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-
-    }
+    private val CREATE_WORKOUT_TAG = "CREATE_WORKOUT_FRAG"
+    private val ADD_EXERCISE_TAG = "ADD_EXERCISE_FRAG"
 
     override fun onStart() {
         super.onStart()
         setContentView(R.layout.add_workout)
 
-        //fragManager.beginTransaction().add(R.id.ll_add_workout, CreateWorkout(), CREATE_WORKOUT_TAG).commit()
-        fragManager.beginTransaction().add(R.id.fl_create_workout, AddExercise(), ADD_EXERCISE_TAG).commit()
+        fragManager.beginTransaction().add(R.id.ll_add_workout, CreateWorkout(), CREATE_WORKOUT_TAG).commit()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        val startWorkoutButton = findViewById<Button>(R.id.b_start_workout)
+
+        //Start workout value
+        startWorkoutButton.setOnClickListener {
+            closeWorkoutFrag()
+            addExerciseFrag()
+        }
     }
 
     override fun addWorkoutFrag() {
@@ -56,7 +58,8 @@ class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler, AddExcerciseFr
         if (addExercise != null)
             fragManager.beginTransaction().remove(addExercise).commit()
         else
-            Toast.makeText(this, "Fragment already not present", Toast.LENGTH_LONG).show()    }
+            Toast.makeText(this, "Fragment already not present", Toast.LENGTH_LONG).show()
+    }
 }
 
 interface CreateWorkoutFragHandler {
@@ -64,7 +67,7 @@ interface CreateWorkoutFragHandler {
     fun closeWorkoutFrag()
 }
 
-interface AddExcerciseFragHandler {
+interface AddExerciseFragHandler {
     fun addExerciseFrag()
     fun closeExerciseFrag()
 }
