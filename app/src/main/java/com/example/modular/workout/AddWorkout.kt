@@ -1,12 +1,13 @@
-package com.example.modular
+package com.example.modular.workout
 
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.*
+import com.example.modular.R
 
 //Split into fragments
-class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler, AddExerciseFragHandler {
+class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler,
+    AddExerciseFragHandler {
 
     private val  fragManager: FragmentManager = supportFragmentManager
 
@@ -17,7 +18,9 @@ class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler, AddExerciseFra
         super.onStart()
         setContentView(R.layout.add_workout)
 
-        fragManager.beginTransaction().add(R.id.ll_add_workout, CreateWorkout(), CREATE_WORKOUT_TAG).commit()
+        fragManager.beginTransaction().add(
+            R.id.ll_add_workout,
+            CreateWorkout(), CREATE_WORKOUT_TAG).commit()
     }
 
     override fun onResume() {
@@ -33,7 +36,9 @@ class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler, AddExerciseFra
 
     override fun addWorkoutFrag() {
         if (fragManager.findFragmentByTag(CREATE_WORKOUT_TAG) == null)
-            fragManager.beginTransaction().add(R.id.fl_create_workout, CreateWorkout(), CREATE_WORKOUT_TAG).commit()
+            fragManager.beginTransaction().add(
+                R.id.fl_create_workout,
+                CreateWorkout(), CREATE_WORKOUT_TAG).commit()
         else
             Toast.makeText(this, "Fragment already present", Toast.LENGTH_LONG).show()
     }
@@ -48,7 +53,9 @@ class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler, AddExerciseFra
 
     override fun addExerciseFrag() {
         if (fragManager.findFragmentByTag(ADD_EXERCISE_TAG) == null)
-            fragManager.beginTransaction().add(R.id.fl_create_workout, AddExercise(), ADD_EXERCISE_TAG).commit()
+            fragManager.beginTransaction().add(
+                R.id.fl_create_workout,
+                AddExercise(), ADD_EXERCISE_TAG).commit()
         else
             Toast.makeText(this, "Fragment already present", Toast.LENGTH_LONG).show()
     }

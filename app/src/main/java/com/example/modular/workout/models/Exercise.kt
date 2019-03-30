@@ -1,4 +1,4 @@
-package com.example.modular
+package com.example.modular.workout.models
 
 class Exercise(
     var exerciseName: String,

@@ -1,19 +1,19 @@
-package com.example.modular
+package com.example.modular.workout
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import kotlinx.android.synthetic.main.add_workout.*
-import kotlinx.android.synthetic.main.create_workout.*
-import kotlinx.android.synthetic.main.create_workout.view.*
+import com.example.modular.R
+import com.example.modular.workout.models.Workout
 import java.time.DayOfWeek
 
 class CreateWorkout : Fragment(), AdapterView.OnItemSelectedListener {
+
     private var newWorkout: Workout = Workout()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val createWorkout = inflater.inflate(R.layout.create_workout, container, false)

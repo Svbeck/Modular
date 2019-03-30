@@ -1,4 +1,4 @@
-package com.example.modular
+package com.example.modular.workout
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.modular.R
+import com.example.modular.workout.models.Exercise
 
 class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -30,7 +32,6 @@ class AddExercise : Fragment(), AdapterView.OnItemSelectedListener {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             emomSpinner.adapter = adapter
         }
-
         //Set emom spinner value
         emomSpinner.onItemSelectedListener = this
 
