@@ -1,81 +1,73 @@
 package com.example.modular
 
-import android.app.Activity
-import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
-import android.os.PersistableBundle
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View
 import android.widget.*
-import kotlinx.android.synthetic.main.add_workout.*
-import java.time.DayOfWeek
 
 //Split into fragments
-class AddWorkout : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class AddWorkout : AppCompatActivity(), CreateWorkoutFragHandler, AddExerciseFragHandler {
 
-    var newWorkout: Workout = Workout()
+    private val  fragManager: FragmentManager = supportFragmentManager
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-
-    }
+    private val CREATE_WORKOUT_TAG = "CREATE_WORKOUT_FRAG"
+    private val ADD_EXERCISE_TAG = "ADD_EXERCISE_FRAG"
 
     override fun onStart() {
         super.onStart()
-        val datePicker = DatePicker(this)
-        val focusDescription = findViewById<EditText>(R.id.et_focus)
-        val weekdaySpinner: Spinner = findViewById(R.id.s_weekday_spinner)
-        val startWorkoutButton = findViewById<Button>(R.id.b_start_workout)
         setContentView(R.layout.add_workout)
 
-        //Set spinner content
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.weekdays,
-            android.R.layout.simple_spinner_dropdown_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            s_weekday_spinner.adapter = adapter
-        }
+        fragManager.beginTransaction().add(R.id.ll_add_workout, CreateWorkout(), CREATE_WORKOUT_TAG).commit()
+    }
 
-        //set date if current date should be used
-        b_set_date.setOnClickListener { view: View? ->
-            val day = datePicker.dayOfMonth.toString()
-            val month = datePicker.month.toString()
-            val year = datePicker.year.toString()
-            newWorkout.date = day + month + year
-        }
-
-        //Set weekday value
-        weekdaySpinner.onItemSelectedListener = this
+    override fun onResume() {
+        super.onResume()
+        val startWorkoutButton = findViewById<Button>(R.id.b_start_workout)
 
         //Start workout value
         startWorkoutButton.setOnClickListener {
-            newWorkout.focus = focusDescription.text.toString()
-            Log.e("Supertest", newWorkout.date.toString() +
-                    newWorkout.weekday.toString() + newWorkout.focus.toString())
+            closeWorkoutFrag()
+            addExerciseFrag()
         }
     }
 
-    //TODO Make adapterview own class and value from that object
-    override fun onItemSelected(adaperView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        when {
-            position == 1 -> newWorkout.weekday = DayOfWeek.MONDAY
-            position == 2 -> newWorkout.weekday = DayOfWeek.TUESDAY
-            position == 3 -> newWorkout.weekday = DayOfWeek.WEDNESDAY
-            position == 4 -> newWorkout.weekday = DayOfWeek.THURSDAY
-            position == 5 -> newWorkout.weekday = DayOfWeek.FRIDAY
-            position == 6 -> newWorkout.weekday = DayOfWeek.SATURDAY
-            position == 7 -> newWorkout.weekday = DayOfWeek.SUNDAY
-        }
+    override fun addWorkoutFrag() {
+        if (fragManager.findFragmentByTag(CREATE_WORKOUT_TAG) == null)
+            fragManager.beginTransaction().add(R.id.fl_create_workout, CreateWorkout(), CREATE_WORKOUT_TAG).commit()
+        else
+            Toast.makeText(this, "Fragment already present", Toast.LENGTH_LONG).show()
     }
 
-    //TODO do something here??
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun closeWorkoutFrag() {
+        val createWorkout = fragManager.findFragmentByTag(CREATE_WORKOUT_TAG)
+        if (createWorkout != null)
+            fragManager.beginTransaction().remove(createWorkout).commit()
+        else
+            Toast.makeText(this, "Fragment already not present", Toast.LENGTH_LONG).show()
     }
 
+    override fun addExerciseFrag() {
+        if (fragManager.findFragmentByTag(ADD_EXERCISE_TAG) == null)
+            fragManager.beginTransaction().add(R.id.fl_create_workout, AddExercise(), ADD_EXERCISE_TAG).commit()
+        else
+            Toast.makeText(this, "Fragment already present", Toast.LENGTH_LONG).show()
+    }
 
+    override fun closeExerciseFrag() {
+        val addExercise = fragManager.findFragmentByTag(ADD_EXERCISE_TAG)
+        if (addExercise != null)
+            fragManager.beginTransaction().remove(addExercise).commit()
+        else
+            Toast.makeText(this, "Fragment already not present", Toast.LENGTH_LONG).show()
+    }
+}
+
+interface CreateWorkoutFragHandler {
+    fun addWorkoutFrag()
+    fun closeWorkoutFrag()
+}
+
+interface AddExerciseFragHandler {
+    fun addExerciseFrag()
+    fun closeExerciseFrag()
 }
